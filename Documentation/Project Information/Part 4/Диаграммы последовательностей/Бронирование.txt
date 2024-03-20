@@ -1,0 +1,19 @@
+@startuml
+RegisteredUser -> VenueManager: getAvailableVenues()
+VenueManager -> VenueManager: getVenueList()
+VenueManager --> RegisteredUser: Result: List<Venue>
+RegisteredUser -> BookingManager: CreateBooking(booking, userID)
+BookingManager --> NotificationService: CreateNotification()
+NotificationService --> NotificationService: CreateNotification()
+BookingManager --> RegisteredUser: Result: Booking
+RegisteredUser -> BookingManager: MakePayment(Booking)
+BookingManager ->] : Call internal payment system
+BookingManager <--] : Responce
+alt successful payment
+   BookingManager -> Booking : createPayment()
+   Booking ->Booking: createPayment()
+   Booking --> BookingManager : Result: Payment
+else PaymentError
+   BookingManager --> RegisteredUser: Result: ERROR
+end
+@enduml

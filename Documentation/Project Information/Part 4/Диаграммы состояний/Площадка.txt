@@ -1,0 +1,30 @@
+@startuml
+state "Плозадка создана" as VenueCreated {
+}
+VenueCreated: VenueStatus.Created
+VenueCreated: null List<Booking>
+[*] --> VenueCreated : Venue()
+
+state "Площадка в использовании" as VenueUsed {
+}
+VenueUsed : VenueStatus.Used
+VenueUsed : not null List<Booking>
+VenueCreated --> VenueUsed : BookingManager.createBooking()
+
+state "Площадка редактируется" as VenueEditing {
+}
+VenueEditing : VenueStatus.Editing
+VenueEditing : List<Booking>
+VenueCreated --> VenueEditing : VenueManager.updateVenue()
+VenueUsed--> VenueEditing : VenueManager.updateVenue()
+
+state "Удалена" as VenueRemoved {
+}
+VenueRemoved : VenueStatus.Removed
+VenueRemoved : null List<Booking>
+VenueUsed --> VenueRemoved 
+VenueEditing --> VenueRemoved
+VenueCreated --> VenueRemoved
+
+ VenueRemoved --> [*]
+@enduml

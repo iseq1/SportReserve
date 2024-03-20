@@ -1,0 +1,18 @@
+@startuml
+Admin-> VenueManager: getVenueList()
+VenueManager -> VenueManager: getVenueList()
+VenueManager --> Admin: Result: List<Venue>
+Admin-> VenueManager: updateVenue(venueID, newVenueDetails)
+VenueManager -> Venue: updateVenueDetails(venueDetails)
+Venue -> Venue: updateDetails()
+Venue --> VenueManager: Result
+alt Venue Updated
+  alt There are users who booked this venue
+    VenueManager --> NotificationService: CreateNotification()
+    NotificationService --> NotificationService: CreateNotification()
+  end
+  VenueManager --> Admin: Result: updatedVenue: Venue
+else
+  VenueManager --> Admin: Error
+end
+@enduml

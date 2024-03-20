@@ -1,0 +1,144 @@
+@startuml
+package users {
+interface IUser{
+  - userID: String
+  - username: String
+  - email: String
+  - password: String
+  + updateProfile(): String
+}
+
+class RegisteredUser {
+  - userData: UserProfile
+  + getAvailableVenues(): List<Venue>
+  + getCurrentBookings(): List<Booking>
+  + receiveNotifications(): List<Notification>
+  + rateServices(reviewDetails: ReviewDetails): Review
+
+  + createBooking(venue: Venue) : Booking
+  + canselBooking(book: Booking) 
+  + updateBooking(book: Booking)
+  + makePayment(booking: Booking): Payment
+
+  + contactSupport(message: String): String
+  
+  + manageProfile()
+}
+
+class Admin {
+  - userData: UserProfile
+  + getVenueList(): List<Venue>
+  + manageVenues(venueDetails: VenueDetails): Venue
+  + getUserList(): List<IUser>
+  + receiveNotifications(): List<Notification>
+}
+
+class SupportTeam {
+  - userData: UserProfile
+  + supportUsers(): List<IUser>
+}
+}
+
+package venues {
+class VenueManager << (S, #FF7700) Static >>{
+  + getVenueList(userID: string): const List<Venue>
+  + updateVenue(venueID: string, venueDetails: VenueDetails)
+}
+
+class Venue {
+  - venueID: String
+  - details: VenueDetails
+  - bookings: List<Booking>
+  + getVenueDetails(): VenueDetails
+}
+
+class VenueDetails {
+  - location: String
+  - sportType: String
+  - price: Double
+  + updateVenueDetails(): String
+}
+}
+
+package notifications {
+class NotificationService << (S, #FF7700) Static >>{
+  - currentNotifications: List<Notification>
+  + getUserNotifications(userID: String): List<Notification>
+  + createNotification()
+}
+
+class Notification {
+  - notificationID: String
+  - userID: String
+  - message: String
+  - timestamp: LocalDateTime
+}
+}
+
+class Review {
+  - reviewID: String
+  - user: RegisteredUser
+  - rating: Double
+  - comment: String
+  + updateReview(reviewDetails: ReviewDetails): String
+}
+
+package bookings {
+class BookingManager<< (S, #FF7700) Static >>{
+  + getBookings(userID: String) : List<Booking>
+  + createBooking(venue: Venue, user: RegisteredUser): Booking
+  + canselBooking(booking: Booking)
+  + updateBooking(booking: Booking): Booking
+  + makePayment(booking: Booking): Payment
+}
+
+class Booking {
+  - bookingID: String
+  + getBookingDetails(): BookingDetails
+  + cancel(): String
+  + makePayment(): Payment
+}
+
+class BookingDetails {
+  - user: RegisteredUser 
+  - venue: Venue
+  - dateTime: LocalDateTime
+  + updateBookingDetails(): String
+}
+
+class Payment {
+  - paymentID: String
+  - booking: Booking
+  - amount: Double
+  - paymentStatus: String
+  + updatePaymentDetails(): String
+}
+}
+
+RegisteredUser -- BookingManager: uses
+RegisteredUser --> NotificationService : uses
+RegisteredUser -- VenueManager
+RegisteredUser *--  Review
+
+Admin--> NotificationService : uses
+Admin -up-|> IUser
+Admin -- VenueManager
+
+VenueManager -- Venue
+
+Venue -left- Booking : has
+Venue *-- VenueDetails 
+VenueManager --> NotificationService: uses
+
+BookingManager -- Booking: uses
+Booking *-- Payment
+Booking *-- BookingDetails
+BookingManager -- NotificationService: uses
+
+NotificationService -- Notification
+RegisteredUser -up-|> IUser
+SupportTeam -up-|> IUser
+
+
+@endulm
+@enduml

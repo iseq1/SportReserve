@@ -1,0 +1,40 @@
+@startuml
+actor Пользователь
+
+node Устройство {
+   artifact app
+}
+
+node "Linux Server" {
+   node "Web Server\n(Apache)" {
+       node "Http server"
+       node "Https server"
+   }
+
+   database PostgreSQL{
+      folder "/var/postgres" as db
+   }
+
+   node "Api(Node.js)" as api {
+   }
+}
+
+cloud Payment_API
+
+Пользователь -left-> Устройство : Управление устройством
+
+app --> "Http server" : port 80
+"Http server" --> app : 301: redirect https
+
+app --> "Https server" : port 443
+
+"Https server" --> api
+
+Payment_API -(0- api
+
+Payment_API -0)- api
+
+db-(0- api
+
+db-0)- api
+@enduml
