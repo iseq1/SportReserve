@@ -5,7 +5,7 @@ import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Замените на ваш секретный ключ
+app.secret_key = 'your_secret_key'  
 
 # Путь для сохранения изображений
 path_to_save_images = os.path.join(app.root_path, 'static', 'imgs')
