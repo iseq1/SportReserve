@@ -1,89 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Админ-Панель</title>
-	<!-- Bootstrap CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	<style>
-        /* Стили для бокового меню */
-        #sidebarMenu {
-            min-height: 100vh; /* Высота на всю высоту вьюпорта */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень для бокового меню */
-            z-index: 1000; /* Устанавливаем z-index, чтобы меню было поверх основного контента */
-        }
-
-        .sidebar .nav-link {
-            border-radius: 0; /* Убираем закругление углов */
-            color: #333; /* Цвет текста */
-        }
-
-        .sidebar .nav-link:hover {
-            background: #f8f9fa; /* Фон при наведении */
-        }
-
-        .sidebar .nav-link.active {
-            background-color: #007bff; /* Фон для активной ссылки */
-            color: white; /* Цвет текста для активной ссылки */
-        }
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roast&Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
-<body>
+<body class="show-chatbot">
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="index.html" class="logo">
+                        <img src="../static/images/logo_all_black_small.svg" alt="" class="logo__img">
+                    </a>
+                    <nav class="menu">
+                        <ul class="menu__list">
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Компания
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="coffee-menu.html" class="menu__list-link">
+                                    Меню
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="test.html" class="menu__list-link">
+                                    Что-то
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Франшиза
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Работа
+                                </a>
+                            </li>
 
-<!-- Header -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="#">Логотип</a>
-		<div class="d-flex align-items-center">
-			<span class="me-3">Привет, Админ</span>
-			<a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Выход</a>
-		</div>
-	</div>
-</nav>
-
-
-<!-- Admin Panel Layout -->
-<div class="container-fluid">
-	<div class="row">
-		<!-- Sidebar Menu -->
-		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-			<div class="position-sticky pt-3">
-				<ul class="nav flex-column">
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="#">
-							<span data-feather="home"></span>
-							Редактор
-						</a>
-					</li>
-					<!-- More menu items -->
-
-				</ul>
-			</div>
-		</nav>
-
-		<!-- Main Content -->
-		{% if json_data %}
-			{% include 'editland.html' %}
-		{% else %}
-			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-					<h1 class="h2">Добро пожаловать в Админ-Панель</h1>
-				</div>
-
-				<!-- Content goes here -->
-				<div class="d-flex align-items-start">
-					<p>Данные пока отсутвуют или их не получилось получить из БД</p>
-				</div>
+                        </ul>
+                    </nav>
+                    <a href=/logout class="logo">
+                        <img src="../static/images/door.svg" alt="" class="profile-logo__img">
+                    </a>
+                </div>
+            </div>
+        </header>
 
 
-			</main>
-		{% endif %}
+        <main class="main">
+            <div class="content grey" style="min-height: calc(-656.8px + 100vh);">
+                <div class="row">
+                    <div class="title-wrap flex" style="padding-bottom:30px;">
+                        <h2 class="indent">Личный кабинет специалиста технической поддержки</h2>
+                    </div>
 
-	</div>
-</div>
+                     <div class="menuLink-wrap verticalScroll pb-0">
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                        <ul class="menuLink mb-0">
+                            <li class="tab_profile active"><a href="#menuLink-wrap" onclick="openbox('tabProf', this); return false" rel="nofollow">Изменение контента</a></li>
+                            <li class="tab_profile active"><a href="#menuLink-wrap" onclick="openbox('tabProf', this); return false" rel="nofollow">Заявки на отмену бронирования</a></li>
+                        </ul>
+
+
+                    </div>
+                </div>
+
+                <div id="tabProf" class="profileBox tabs-content__profile" style="display:block;">
+                    <div class="row">
+                        <div class="d-flex">
+                            <div class="sidebar">
+                                <div class="wrapper">
+                                    <div class="user">
+                                    <div class="text-wrap mb-2 pb-1">
+                                        <p class="name" style="font-size: 20px;"> Выберите действие: </p>
+                                    </div>
+                                </div>
+
+                                    <ul class="listInfo">
+
+                                        <li>
+                                            <a href="#" class="list-info-item">
+                                                <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                Добавить новую карточку
+                                            </a>
+                                        </li>
+                                        <hr>
+                                        <li>
+                                            <a href="#" class="list-info-item">
+                                                <img class="ic_finished_orders" src="../static/images/svg-files/swap.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                Изменить выбранную карточку
+                                            </a>
+                                        </li>
+                                        <hr>
+                                        <li>
+                                            <a href="#" class="list-info-item">
+                                                <img class="ic_finished_orders" src="../static/images/svg-files/delete.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                Удалить выбранную карточку
+                                            </a>
+                                        </li>
+                                        <hr>
+
+                                    </ul>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="sidebar" style="width: 800px;">
+                                <div class="wrapper" style="min-width: 750px;">
+                                    <div class="user" style="display: inline-block;">
+                                        <h2>
+                                            Добавление новой карточки
+                                        </h2>
+                                        <div class="add-content__form" style="padding-top: 50px;">
+                                            <form method="post" action=/place_action style="margin: 0px 50px; justify-content: center;" enctype="multipart/form-data">
+                                                <input style="display: none" type="text" value="add" name="action">
+                                                <ul class="listInfo">
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Тип площадки</p>
+                                                        </div>
+                                                        <select style="padding-right: 50px;" name="type" id="typeSelect">
+                                                            <option value="0" selected>Выберите тип</option>
+                                                            {% for item in json_data['place_list'] %}
+                                                            <option value="{{item['type']}}">{{item['type']}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Подтип площадки</p>
+                                                        </div>
+                                                        <select style="padding-right: 50px;" name="subtype" id="subtypeSelect">
+                                                            <option value="0" selected>Выберите подтип</option>
+                                                            {% for item in json_data['place_list'] %}
+                                                            <optgroup label="{{item['type']}}">
+                                                                {% for types in item['subtype'] %}
+                                                                <option value="{{types}}">{{types}}</option>
+                                                                {% endfor %}
+                                                            </optgroup>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Название</p>
+                                                        </div>
+                                                        <input type="text" name="name">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Краткое описание</p>
+                                                        </div>
+                                                        <input type="text" name="description">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Описание</p>
+                                                        </div>
+                                                        <input type="text" name="subdescription">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Адрес</p>
+                                                        </div>
+                                                        <input type="text" name="address">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Минимальный срок аренды</p>
+                                                        </div>
+                                                            <input type="number" name="rental_period">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Цена</p>
+                                                        </div>
+                                                        <input type="number" name="price">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Фотокарточка</p>
+                                                        </div>
+                                                        <input type="file" name="photo_path">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Наличие раздевалок</p>
+                                                        </div>
+                                                        <input type="checkbox" name="locker_room">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Наличие душевых</p>
+                                                        </div>
+                                                        <input type="checkbox" name="shower">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Наличие парковки</p>
+                                                        </div>
+                                                        <input type="checkbox" name="parking">
+                                                    </li>
+                                                    <li style="display: flex; justify-content: space-between;">
+                                                        <div style="display: flex; justify-content: space-between;">
+                                                            <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                            <p style="padding-right: 50px;">Наличие инвентаря</p>
+                                                        </div>
+                                                        <input type="checkbox" name="inventory">
+                                                    </li>
+                                                </ul>
+                                                <button style="border-radius: 10px;" type="submit" class="more__btn" >Сохранить</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <nav class="footer__menu">
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Продукты
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="coffee-menu.html" class="footer__menu-link">
+                                Кофе
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="specials.html" class="footer__menu-link">
+                                Предложения
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Мерч
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Ресурсы
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Блог
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="faq.html" class="footer__menu-link">
+                                FAQ
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="contact.html" class="footer__menu-link">
+                                Связаться с нами
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Работать с нами
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="franchise.html" class="footer__menu-link">
+                                Франшиза
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="bartenders.html" class="footer__menu-link">
+                                Бариста
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                О Roast&Run
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="aboutus.html" class="footer__menu-link">
+                                О нас
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Команда
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Карьера
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="app">
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="../static/images/appstore.svg" alt="">
+                        </a>
+                    </li>
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="../static/images/googleplay.svg" alt="">
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer__copy">
+                    <p style="padding-bottom: 25px;" class="footer__copy-text">
+                        По вопросам об услуге покупки кофе Roast&Run звоните по телефону 1-888-878-3227. Сертифицированные бариста по контракту обязаны с Roast&Run выполнять определенные требования по обслуживанию клиентов и проходить программу сертификации бариста Roast&Run.
+                    </p>
+                    <p class="footer__copy-text">
+                        Roast&Run не занимается брокерской деятельностью, продажей и арендой кофейных зерен. Если не указано иное, все напитки, представленные на этом сайте, предлагаются для продажи в лицензированных кофейнях. Все напитки подлежат предварительной продаже. Заходя на этот веб-сайт, вы соглашаетесь с Условиями обслуживания и Политикой конфиденциальности Roast&Run.
+                    </p>
+                </div>
+                <nav style="padding-bottom: 25px;" class="copy__nav">
+                    <ul class="copy__nav-list">
+                        <li class="copy__nav-item">
+                            <a href="terms-of-service.html" class="copy__nav-link">
+                                Условия использования
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="privacy-policy.html" class="copy__nav-link slide-out">
+                                Политика конфиденциальности
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="cookies.html" class="copy__nav-link">
+                                Не продавайте мою личную информацию
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+    </div>
+
+
+    <script src="../static/js/profile-item-info-switcher.js"></script>
 </body>
 </html>

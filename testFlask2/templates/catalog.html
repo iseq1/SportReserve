@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportReserve&Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body class="show-chatbot">
+    <div class="wrapper fade-in">
+        <header class="header header-main">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="index.html" class="logo">
+                        <img src="../static/images/logo_all_black_small.svg" alt="" class="logo__img">
+                    </a>
+                    <nav class="menu">
+                        <ul class="menu__list">
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Company
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="coffee-menu.html" class="menu__list-link">
+                                    Coffee
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="test.html" class="menu__list-link">
+                                    Something
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Franchise
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Work
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <a href=/login class="menu__list-link">
+                        <img src="../static/images/profile-img.svg" alt="" class="profile-logo__img">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <input type="hidden" id="sender-id" value="{{ sender_id }}">
+            <button class="chatbot-toggler">
+                <span class="material-symbols-outlined">mode_comment</span>
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="chatbot">
+                <header>
+                    <h2>Тех.поддержка</h2>
+                    <span class="material-symbols-outlined">close</span>
+                </header>
+                <ul  id="chatbox" class="chatbox">
+                    <li class="chat incoming">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                        <p>Задайте интересующий вас вопрос</p>
+                    </li>
+                    <li class="chat outgoing">
+                        <p>Тадам</p>
+                    </li>
+                </ul>
+                <div class="chat-input">
+                    <textarea id="user-message" placeholder="Написать..." required></textarea>
+                    <span id="send-btn" class="material-symbols-outlined">send</span>
+                </div>
+            </div>
+            <section class="top">
+                <!--<div class="container">
+                    <h1 class="menu-title title">
+                        Enjoy our new lemonades
+                    </h1>
+                </div>-->
+            </section>
+            <div class="swiper-slide" style="background-image: url(../static/images/tenis.jpg);"></div>
+            <section class="section block-drinks">
+                <div class="container-upgrade">
+                    <div class="block-drinks__links">
+                        <div class="menu-links">
+                            <a class="menu-links__item" href="#category-47">Летние площадки</a>
+                            <a class="menu-links__item" href="#category-40">Зимние площадки</a>
+                            <a class="menu-links__item" href="#category-44">Паркетные площадки</a>
+                            <a class="menu-links__item" href="#category-1">Бассейны</a>
+                        </div>
+                    </div>
+                    <div class="block-drinks__wrap">
+                        <div class="block-drinks__item" id="category-47">
+                            <div class="block-drinks__item-title">
+                                Летние площадки
+                            </div>
+                            <div class="block-drinks__item-wrap">
+
+                                <a class="drinks-item drinks-item_home" href=/catalog-page/tennis-outdoor>
+                                    <div class="scale"><img src="../static/images/catalog/summer-sport/tennis-outdoor/tennis-outdoors.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Теннисная площадка под открытым небом</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-cappuccino-banana-sponge-cake-with-strawberries.html">
+                                    <div class="scale"><img src="../static/images/catalog/summer-sport/tenis-indoor.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Теннисная площадка под крытым небом</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/latte-coconut-mango-ice-cream.html">
+                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/latte-coconut-mango-ice-cream.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Latte Coconut mango ice cream</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-latte-coconut-ice-cream-with-mango.html">
+                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/ice-latte-coconut-ice-cream-with-mango.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Ice Latte Coconut ice cream with mango</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/raf-rice-pudding-with-papaya.html">
+                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/raf-rice-pudding-with-papaya.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Raf Rice pudding with papaya</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-rough-rice-pudding-with-papaya.html">
+                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/ice-rough-rice-pudding-with-papaya.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Ice Raf Rice pudding with papaya</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/lemonade-with-watermelon-pineapple-and-Rose.html">
+                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/lemonade-with-watermelon-pineapple-and-Rose.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Lemonade with Watermelon, Pineapple and Rose</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/coffee-tonic-with-watermelon-pineapple-and-rose.html">
+                                    <div class="scale"> <img src="images/coffee-menu/spring-summer-coffee/coffee-tonic-with-watermelon-pineapple-and-rose.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Coffee tonic with Watermelon, Pineapple and Rose</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/lemonade-with-peach-passion-fruit-and-orange-blossom.html">
+                                    <div class="scale"> <img src="images/coffee-menu/spring-summer-coffee/lemonade-with-peach-passion-fruit-and-orange-blossom.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Lemonade with peach, passion fruit and orange blossom</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/coffee-tonic-with-peach-passion-fruit-and-orange-blossom.html">
+                                    <div class="scale">  <img src="images/coffee-menu/spring-summer-coffee/coffee-tonic-with-peach-passion-fruit-and-orange-blossom.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Coffee tonic with peach, passion fruit and orange blossom</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/lemonade-with-grapes-aloe-and-lavender.html">
+                                    <div class="scale"> <img src="images/coffee-menu/spring-summer-coffee/lemonade-with-grapes-aloe-and-lavender.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Lemonade with Grapes, Aloe and Lavender</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/coffee-tonic-with-grapes-aloe-and-lavender.html">
+                                    <div class="scale"> <img src="images/coffee-menu/spring-summer-coffee/coffee-tonic-with-grapes-aloe-and-lavender.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Coffee tonic with grapes, aloe and lavender</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="block-drinks__item" id="category-40">
+                            <div class="block-drinks__item-title">Зимние площадки</div>
+                                <div class="block-drinks__item-wrap">
+                                    <a class="drinks-item drinks-item_home" href="menu-pages/raf-raspberry-coconut.html">
+                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/raf-raspberry-coconut.jpg" alt="image"></div>
+                                        <div class="drinks-item__name">Raf Raspberry coconut</div>
+                                    </a>
+                                    <a class="drinks-item drinks-item_home" href="menu-pages/latte-banana-ice-cream-with-salted-caramel.html">
+                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/latte-banana-ice-cream-with-salted-caramel.jpg" alt="image"></div>
+                                        <div class="drinks-item__name">Latte Banana ice cream with salted caramel</div>
+                                    </a>
+                                    <a class="drinks-item drinks-item_home" href="menu-pages/mochaccino-orange-brownie.html">
+                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/mochaccino-orange-brownie.jpg" alt="image"></div>
+                                        <div class="drinks-item__name">Mochaccino Orange Brownie</div>
+                                    </a>
+                                    <a class="drinks-item drinks-item_home" href="menu-pages/raf-birds-milk.html">
+                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/raf-birds-milk.jpg" alt="image"></div>
+                                        <div class="drinks-item__name">Raf Bird's milk</div>
+                                    </a>
+                                    <a class="drinks-item drinks-item_home" href="menu-pages/cappuccino-croissant-with-maple-syrup-and-walnuts.html">
+                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/cappuccino-croissant-with-maple-syrup-and-walnuts.jpg" alt="image"></div>
+                                        <div class="drinks-item__name">Cappuccino Croissant with maple syrup and walnuts</div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="block-drinks__item" id="category-44">
+                                <div class="block-drinks__item-title">Паркетные площадки</div>
+                                    <div class="block-drinks__item-wrap">
+                                    <a class="drinks-item drinks-item_home" href="menu-pages/sea-buckthorn-tea-with-orange-and-ginger.html">
+                                        <div class="scale"> <img src="images/coffee-menu/author's-teas/sea-buckthorn-tea-with-orange-and-ginger.jpg" alt="image"></div>
+                                        <div class="drinks-item__name">Sea buckthorn tea with orange and ginger</div>
+                                    </a>
+                                    <a class="drinks-item drinks-item_home" href="menu-pages/raspberry-tea-with-cranberry-and-barberry.html">
+                                        <div class="scale"> <img src="images/coffee-menu/author's-teas/raspberry-tea-with-cranberry-and-barberry.jpg" alt="image"></div>
+                                        <div class="drinks-item__name">Raspberry tea with cranberry and barberry</div>
+                                    </a>
+                                    <a class="drinks-item drinks-item_home" href="menu-pages/mango-tea-with-jasmine-and-kaffir-lime.html">
+                                        <div class="scale"> <img src="images/coffee-menu/author's-teas/mango-tea-with-jasmine-and-kaffir-lime.jpg" alt="image"></div>
+                                        <div class="drinks-item__name">Mango tea with jasmine and kaffir lime</div>
+                                    </a>
+
+                            </div>
+                        </div>
+                        <div class="block-drinks__item" id="category-1">
+                            <div class="block-drinks__item-title">Бассейны</div>
+                            <div class="block-drinks__item-wrap">
+                                <a class="drinks-item drinks-item_home" href="menu-pages/raf.html">
+                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/raf.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Raf</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/cappuccino.html">
+                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/cappuccino.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Cappuccino</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/latte.html">
+                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/latte.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Latte</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/flat-white.html">
+                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/flat-white.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Flat White</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/americano.html">
+                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/americano.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Americanno</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/espresso.html">
+                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/espresso.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Espresso</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/hot-chocolate.html">
+                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/hot-chocolate.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Hot Chocolate</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/cocoa.html">
+                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/cocoa.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Cocoa</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href=/coffee-menu/ice-latte>
+                                    <div class="scale"> <img src="../static/images/coffee-menu/classic-coffee/ice-latte.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Ice Latte</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-raf.html">
+                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/ice-raf.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Ice Raf</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-cocoa.html">
+                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/ice-cocoa.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Ice Cocoa</div>
+                                </a>
+                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-cappuccino.html">
+                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/ice-cappuccino.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">Ice Cappuccino</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <nav class="footer__menu">
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Products
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="coffee-menu.html" class="footer__menu-link">
+                                Coffee
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Specials
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Merch
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Resources
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                FAQ
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="" class="footer__menu-link">
+                                Contact us
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Work with US
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Franchise
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Bartenders
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                About
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                About us
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Team
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Careers
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="app">
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="images/appstore.svg" alt="">
+                        </a>
+                    </li>
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="images/googleplay.svg" alt="">
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer__copy">
+                    <p class="footer__copy-text">
+                        For questions about the Roast&Run Coffee Buying Service please call 1-888-878-3227, Certified Baristas are contractually obligated by Roast&Run to meet certain customer service requirements and complete the Roast&Run Barista Certification Program.
+                    </p>
+                    <p class="footer__copy-text">
+                        Roast&Run does not broker, sell, or lease coffee beans. Unless otherwise noted, all beverages shown on this website are offered for sale by licensed coffee shops. All drinks are subject to prior sale. By accessing this website, you agree to the Roast&Run Terms of Service and Privacy Policy
+                    </p>
+                </div>
+                <nav class="copy__nav">
+                    <ul class="copy__nav-list">
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Terms of Service
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Do Not Sell My Personal Information
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="../static/js/helper-window-message-taker-user-side.js"></script>
+</body>
+</html>
