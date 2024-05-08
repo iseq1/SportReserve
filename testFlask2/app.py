@@ -654,7 +654,8 @@ def placeaction():
                     flag = True
                 if flag:
                     new_file_path += item + '/'
-
+            if new_file_path.endswith('/'):
+                new_file_path = new_file_path[:-1]
             if 'locker_room' in request.form:
                 locker_room = 'True'
             else:
@@ -676,37 +677,99 @@ def placeaction():
                 changer.insert_data(table='place', type=f'{type}', subtype=f'{subtype}', name=f'{name}', description=f'{description}',
                                     subdescription=f'{subdescription}', address=f'{address}', rental_period=int(rental_period), price=int(price),
                                     photo_path=f'{new_file_path}', locker_rooms=f'{locker_room}', shower=f'{shower}', parking=f'{parking}', inventory=f'{inventory}')
+        elif action == 'change':
+            type = request.form['type']
+            subtype = request.form['subtype']
+            name = request.form['name']
+            conn = get_db_connection()
+            place_info = conn.execute(f'''SELECT * FROM place WHERE type = "{type}" AND subtype="{subtype}" AND name="{name}"''').fetchone()
+            conn.close()
+            new_description = request.form.get('description')
+            if new_description is None or new_description.strip() == '':
+                new_description = place_info['description']
+            new_subdescription = request.form.get('subdescription')
+            if new_subdescription is None or new_subdescription.strip() == '':
+                new_subdescription = place_info['subdescription']
+            new_address = request.form.get('address')
+            if new_address is None or new_address.strip() == '':
+                new_address = place_info['address']
+            new_rental_period = request.form.get('rental_period')
+            if new_rental_period is None or new_rental_period.strip() == '':
+                new_rental_period = place_info['rental_period']
+            new_price = request.form.get('price')
+            if new_price is None or new_price.strip() == '':
+                new_price = place_info['price']
+            if 'photo_path' in request.files:
+                image_file = request.files['photo_path']
+                # Проверяем, что файл не пустой
+                if image_file and image_file.filename != '':
+                    photo_name = place_info['photo_path']
+                    file_path = os.path.join(path_to_save(translate(type), translate(subtype)), photo_name.split('/')[-1])
+                    print(file_path)
+                    image_file.save(file_path)
+                    new_photo_path = place_info['photo_path']
+                else:
+                    new_photo_path = place_info['photo_path']
+            else:
+                new_photo_path = place_info['photo_path']
+
+            if 'locker_room' in request.form:
+                new_locker_room = 'True'
+            else:
+                new_locker_room = 'False'
+
+            if 'shower' in request.form:
+                new_shower = 'True'
+            else:
+                new_shower = 'False'
+            if 'parking' in request.form:
+                new_parking = 'True'
+            else:
+                new_parking = 'False'
+            if 'inventory' in request.form:
+                new_inventory = 'True'
+            else:
+                new_inventory = 'False'
+
+            with DataPusher('database.db') as changer:
+                changer.update_data(table='place', ID=f'{place_info['id']}', type=f'{type}', subtype=f'{subtype}', name=f'{name}', description=f'{new_description}',
+                                    subdescription=f'{new_subdescription}', address=f'{new_address}', rental_period=int(new_rental_period), price=int(new_price),
+                                    photo_path=f'{new_photo_path}', locker_rooms=f'{new_locker_room}', shower=f'{new_shower}', parking=f'{new_parking}', inventory=f'{new_inventory}')
+        elif action == 'delete':
+            type = request.form['type']
+            subtype = request.form['subtype']
+            name = request.form['name']
+            conn = get_db_connection()
+            place_info = conn.execute(
+                f'''SELECT * FROM place WHERE type = "{type}" AND subtype="{subtype}" AND name="{name}"''').fetchone()
+            conn.close()
+            with DataPusher('database.db') as changer:
+                changer.delete_data(table='place', ID=f'{place_info['id']}')
+
     return redirect(url_for('adminpage'))
 
 
 @app.route('/admin_panel' )
 def adminpage():
     conn = get_db_connection()
-    place_info = conn.execute(f'''
-        SELECT DISTINCT type, subtype                   
+    place_info = conn.execute('''
+        SELECT type, subtype, STRING_AGG(name, ',') AS names
         FROM place
+        GROUP BY type, subtype
     ''').fetchall()
     conn.close()
-    place_list = [dict(ix) for ix in place_info]
-    json_data = {}
 
-    for raw in place_list:
-        # Создание новой записи, если ключ еще не существует
-        if 'place_list' not in json_data:
-            json_data['place_list'] = []
+    json_data = {'place_list': []}
 
-        # Поиск существующего элемента с таким же типом
-        existing_type = next((item for item in json_data['place_list'] if item['type'] == raw['type']), None)
+    for row in place_info:
+        json_data['place_list'].append({
+            'type': row['type'],
+            'subtype': [{
+                'name': row['subtype'],
+                'names': row['names'].split(',') if row['names'] else []
+            }]
+        })
 
-        # Если тип еще не существует, добавляем его с пустым списком подтипов
-        if existing_type is None:
-            json_data['place_list'].append({
-                'type': raw['type'],
-                'subtype': [raw['subtype']]  # Создаем список подтипов
-            })
-        else:
-            # Если тип уже существует, добавляем подтип в список
-            existing_type['subtype'].append(raw['subtype'])
     print(json_data)
 
     return render_template('admin_panel.html', json_data=json_data)
