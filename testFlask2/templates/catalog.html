@@ -92,165 +92,27 @@
                 <div class="container-upgrade">
                     <div class="block-drinks__links">
                         <div class="menu-links">
-                            <a class="menu-links__item" href="#category-47">Летние площадки</a>
-                            <a class="menu-links__item" href="#category-40">Зимние площадки</a>
-                            <a class="menu-links__item" href="#category-44">Паркетные площадки</a>
-                            <a class="menu-links__item" href="#category-1">Бассейны</a>
+                            {% for places in json_data['place_list'] %}
+                            <a class="menu-links__item" href="#category-{{loop.index}}">{{places['type'][0]}}</a>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="block-drinks__wrap">
-                        <div class="block-drinks__item" id="category-47">
+                        {% for places in json_data['place_list'] %}
+                        <div class="block-drinks__item" id="category-{{loop.index}}">
                             <div class="block-drinks__item-title">
-                                Летние площадки
+                                {{places['type'][0]}}
                             </div>
                             <div class="block-drinks__item-wrap">
-
-                                <a class="drinks-item drinks-item_home" href=/catalog-page/tennis-outdoor>
-                                    <div class="scale"><img src="../static/images/catalog/summer-sport/tennis-outdoor/tennis-outdoors.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Теннисная площадка под открытым небом</div>
+                                {% for subtypes in places['subtypes'] %}
+                                <a class="drinks-item drinks-item_home" href=/catalog-page/{{subtypes[1]}}>
+                                    <div class="scale"><img src="../static/images/catalog/{{places['type'][1]}}/{{subtypes[1]}}/{{subtypes[1]}}.jpg" alt="image"></div>
+                                    <div class="drinks-item__name">{{subtypes[0]}}</div>
                                 </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-cappuccino-banana-sponge-cake-with-strawberries.html">
-                                    <div class="scale"><img src="../static/images/catalog/summer-sport/tenis-indoor.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Теннисная площадка под крытым небом</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/latte-coconut-mango-ice-cream.html">
-                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/latte-coconut-mango-ice-cream.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Latte Coconut mango ice cream</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-latte-coconut-ice-cream-with-mango.html">
-                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/ice-latte-coconut-ice-cream-with-mango.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Ice Latte Coconut ice cream with mango</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/raf-rice-pudding-with-papaya.html">
-                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/raf-rice-pudding-with-papaya.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Raf Rice pudding with papaya</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-rough-rice-pudding-with-papaya.html">
-                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/ice-rough-rice-pudding-with-papaya.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Ice Raf Rice pudding with papaya</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/lemonade-with-watermelon-pineapple-and-Rose.html">
-                                    <div class="scale"><img src="images/coffee-menu/spring-summer-coffee/lemonade-with-watermelon-pineapple-and-Rose.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Lemonade with Watermelon, Pineapple and Rose</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/coffee-tonic-with-watermelon-pineapple-and-rose.html">
-                                    <div class="scale"> <img src="images/coffee-menu/spring-summer-coffee/coffee-tonic-with-watermelon-pineapple-and-rose.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Coffee tonic with Watermelon, Pineapple and Rose</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/lemonade-with-peach-passion-fruit-and-orange-blossom.html">
-                                    <div class="scale"> <img src="images/coffee-menu/spring-summer-coffee/lemonade-with-peach-passion-fruit-and-orange-blossom.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Lemonade with peach, passion fruit and orange blossom</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/coffee-tonic-with-peach-passion-fruit-and-orange-blossom.html">
-                                    <div class="scale">  <img src="images/coffee-menu/spring-summer-coffee/coffee-tonic-with-peach-passion-fruit-and-orange-blossom.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Coffee tonic with peach, passion fruit and orange blossom</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/lemonade-with-grapes-aloe-and-lavender.html">
-                                    <div class="scale"> <img src="images/coffee-menu/spring-summer-coffee/lemonade-with-grapes-aloe-and-lavender.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Lemonade with Grapes, Aloe and Lavender</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/coffee-tonic-with-grapes-aloe-and-lavender.html">
-                                    <div class="scale"> <img src="images/coffee-menu/spring-summer-coffee/coffee-tonic-with-grapes-aloe-and-lavender.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Coffee tonic with grapes, aloe and lavender</div>
-                                </a>
+                                {% endfor %}
                             </div>
                         </div>
-                        <div class="block-drinks__item" id="category-40">
-                            <div class="block-drinks__item-title">Зимние площадки</div>
-                                <div class="block-drinks__item-wrap">
-                                    <a class="drinks-item drinks-item_home" href="menu-pages/raf-raspberry-coconut.html">
-                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/raf-raspberry-coconut.jpg" alt="image"></div>
-                                        <div class="drinks-item__name">Raf Raspberry coconut</div>
-                                    </a>
-                                    <a class="drinks-item drinks-item_home" href="menu-pages/latte-banana-ice-cream-with-salted-caramel.html">
-                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/latte-banana-ice-cream-with-salted-caramel.jpg" alt="image"></div>
-                                        <div class="drinks-item__name">Latte Banana ice cream with salted caramel</div>
-                                    </a>
-                                    <a class="drinks-item drinks-item_home" href="menu-pages/mochaccino-orange-brownie.html">
-                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/mochaccino-orange-brownie.jpg" alt="image"></div>
-                                        <div class="drinks-item__name">Mochaccino Orange Brownie</div>
-                                    </a>
-                                    <a class="drinks-item drinks-item_home" href="menu-pages/raf-birds-milk.html">
-                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/raf-birds-milk.jpg" alt="image"></div>
-                                        <div class="drinks-item__name">Raf Bird's milk</div>
-                                    </a>
-                                    <a class="drinks-item drinks-item_home" href="menu-pages/cappuccino-croissant-with-maple-syrup-and-walnuts.html">
-                                        <div class="scale"> <img src="images/coffee-menu/2023best-coffee/cappuccino-croissant-with-maple-syrup-and-walnuts.jpg" alt="image"></div>
-                                        <div class="drinks-item__name">Cappuccino Croissant with maple syrup and walnuts</div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="block-drinks__item" id="category-44">
-                                <div class="block-drinks__item-title">Паркетные площадки</div>
-                                    <div class="block-drinks__item-wrap">
-                                    <a class="drinks-item drinks-item_home" href="menu-pages/sea-buckthorn-tea-with-orange-and-ginger.html">
-                                        <div class="scale"> <img src="images/coffee-menu/author's-teas/sea-buckthorn-tea-with-orange-and-ginger.jpg" alt="image"></div>
-                                        <div class="drinks-item__name">Sea buckthorn tea with orange and ginger</div>
-                                    </a>
-                                    <a class="drinks-item drinks-item_home" href="menu-pages/raspberry-tea-with-cranberry-and-barberry.html">
-                                        <div class="scale"> <img src="images/coffee-menu/author's-teas/raspberry-tea-with-cranberry-and-barberry.jpg" alt="image"></div>
-                                        <div class="drinks-item__name">Raspberry tea with cranberry and barberry</div>
-                                    </a>
-                                    <a class="drinks-item drinks-item_home" href="menu-pages/mango-tea-with-jasmine-and-kaffir-lime.html">
-                                        <div class="scale"> <img src="images/coffee-menu/author's-teas/mango-tea-with-jasmine-and-kaffir-lime.jpg" alt="image"></div>
-                                        <div class="drinks-item__name">Mango tea with jasmine and kaffir lime</div>
-                                    </a>
-
-                            </div>
-                        </div>
-                        <div class="block-drinks__item" id="category-1">
-                            <div class="block-drinks__item-title">Бассейны</div>
-                            <div class="block-drinks__item-wrap">
-                                <a class="drinks-item drinks-item_home" href="menu-pages/raf.html">
-                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/raf.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Raf</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/cappuccino.html">
-                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/cappuccino.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Cappuccino</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/latte.html">
-                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/latte.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Latte</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/flat-white.html">
-                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/flat-white.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Flat White</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/americano.html">
-                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/americano.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Americanno</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/espresso.html">
-                                    <div class="scale">  <img src="images/coffee-menu/classic-coffee/espresso.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Espresso</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/hot-chocolate.html">
-                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/hot-chocolate.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Hot Chocolate</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/cocoa.html">
-                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/cocoa.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Cocoa</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href=/coffee-menu/ice-latte>
-                                    <div class="scale"> <img src="../static/images/coffee-menu/classic-coffee/ice-latte.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Ice Latte</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-raf.html">
-                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/ice-raf.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Ice Raf</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-cocoa.html">
-                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/ice-cocoa.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Ice Cocoa</div>
-                                </a>
-                                <a class="drinks-item drinks-item_home" href="menu-pages/ice-cappuccino.html">
-                                    <div class="scale"> <img src="images/coffee-menu/classic-coffee/ice-cappuccino.jpg" alt="image"></div>
-                                    <div class="drinks-item__name">Ice Cappuccino</div>
-                                </a>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </section>

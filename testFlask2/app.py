@@ -177,6 +177,8 @@ def translate(place_name):
         'Летние площадки': 'summer-sport',
         'Теннисные площадки под открытым небом': 'tennis-outdoor',
         'tennis-outdoor': 'Теннисные площадки под открытым небом',
+        'Теннисные площадки под крытым небом': 'tennis-indoor',
+        'tennis-indoor': 'Теннисные площадки под крытым небом'
     }
 
     return names[place_name]
@@ -436,7 +438,28 @@ def catalog(place_name):
 @app.route('/catalog-page')
 def catalogpage():
     print(session)
-    return render_template('catalog.html', sender_id=session['user_id'])
+    conn = get_db_connection()
+    place_info = conn.execute('''
+            SELECT type, GROUP_CONCAT(DISTINCT subtype) AS subtypes
+            FROM place
+            GROUP BY type
+        ''').fetchall()
+    conn.close()
+
+    path_photo_list = []
+
+
+    for it in place_info:
+        print([i for i in it])
+    json_data = {'place_list': []}
+    for row in place_info:
+        json_data['place_list'].append({
+            'type': [row['type'], translate(row['type'])],
+            'subtypes': [(item[0], item[1]) for item in zip(row['subtypes'].split(','), [translate(subtypes) for subtypes in row['subtypes'].split(',')]) if row['subtypes']]
+        })
+
+    print(json_data)
+    return render_template('catalog.html', json_data=json_data, sender_id=session['user_id'])
 
 
 @app.route('/registration', methods=['GET', 'POST'])
