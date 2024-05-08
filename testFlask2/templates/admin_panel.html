@@ -66,7 +66,7 @@
 
                         <ul class="menuLink mb-0">
                             <li class="tab_profile active"><a href="#menuLink-wrap" onclick="openbox('tabProf', this); return false" rel="nofollow">Изменение контента</a></li>
-                            <li class="tab_profile active"><a href="#menuLink-wrap" onclick="openbox('tabProf', this); return false" rel="nofollow">Заявки на отмену бронирования</a></li>
+                            <li class="tab_profile "><a href="#menuLink-wrap" onclick="openbox('tabCancel', this); return false" rel="nofollow">Заявки на отмену бронирования</a></li>
                         </ul>
 
 
@@ -256,7 +256,7 @@
                                                             {% for name in subtype['names'] %}
                                                             <li style="padding-left: 50px; display: list-item;">
                                                                 <a data-target="change_card_form" href="#" class="list-info-item" data-type="{{item['type']}}" data-subtype="{{subtype['name']}}" data-name="{{name}}">
-                                                                    <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                                    <img class="ic_finished_orders" src="../static/images/svg-files/swap.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
                                                                     {{name}}
                                                                 </a>
                                                             </li>
@@ -398,7 +398,7 @@
                                                                     <input style="display: none" type="text" value="{{subtype['name']}}" name="subtype" >
                                                                     <input style="display: none" type="text" value="{{name}}" name="name" >
                                                                     <button style="border-radius: 10px; margin: 0px 0px; padding: 4px 14px;" type="submit" class="more__btn" >
-                                                                        <img class="ic_finished_orders" src="../static/images/svg-files/add.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                                        <img class="ic_finished_orders" src="../static/images/svg-files/delete.svg" style="filter: invert(100%); width: 30px; height: 30px; padding-right: 10px;" alt="">
                                                                         {{name}}
                                                                     </button>
                                                                 </form>
@@ -413,6 +413,144 @@
                                             {% endfor %}
                                         </ul>
                                     </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div id="tabCancel" class="profileBox tabs-content__profile" style="display:none;">
+                    <div class="row">
+                        <div class="d-flex">
+                            <div class="sidebar">
+                                <div class="wrapper">
+                                    <div class="user">
+                                    <div class="text-wrap mb-2 pb-1">
+                                        <p class="name" style="font-size: 18px;"> Заявки на отмену бронирования: </p>
+                                    </div>
+                                    </div>
+
+                                        <ul class="listInfo">
+                                            {% for item in json_data['cancel_list'] %}
+                                            <li>
+                                                <a href="#" class="list-info-item" data-target="cancellation_form_{{item['cancellation_id']}}">
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/delete.svg" style="width: 30px; height: 30px; padding-right: 10px;" alt="">
+                                                    Заявка на отмену № {{item['cancellation_id']}}
+                                                </a>
+                                            </li>
+                                            <hr>
+                                            {% endfor %}
+
+
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+
+
+
+                            <div class="sidebar" style="width: 800px;">
+                                <div class="wrapper" style="min-width: 750px;">
+                                    {% for item in json_data['cancel_list'] %}
+                                    <div id="cancellation_form_{{item['cancellation_id']}}" class="user" style="display: none;">
+                                        <div class="text-wrap mb-2 pb-1">
+                                            <h2>
+                                             Заявка на отмену № {{item['cancellation_id']}}
+                                            </h2>
+                                        </div>
+                                        <ul class="listInfo delete-reserve" style="display: list-item">
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Номер бронирования:
+                                                </p>
+                                                <p> {{item['reservation_id']}} </p>
+                                            </li>
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Тип площадки:
+                                                </p>
+                                                <p> {{item['type']}}</p>
+                                            </li>
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Подтип площадки:
+                                                </p>
+                                                <p> {{item['subtype']}}</p>
+                                            </li>
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Наименование:
+                                                </p>
+                                                <p> {{item['name']}}</p>
+                                            </li>
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Даты бронирования:
+                                                </p>
+                                                <p> {{item['start_date']}} - {{item['finish_date']}}</p>
+                                            </li>
+                                            <hr>
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Имя пользователя:
+                                                </p>
+                                                <p> {{item['fullname']}} </p>
+                                            </li>
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Контактный номер:
+                                                </p>
+                                                <p> {{item['number']}} </p>
+                                            </li>
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Почта для уведомления:
+                                                </p>
+                                                <p> {{item['email']}} </p>
+                                            </li>
+                                            <li class="information-order__list-item" >
+                                                <p>
+                                                    <img class="ic_finished_orders" src="../static/images/svg-files/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                    Причина:
+                                                </p>
+                                                {% if item['reason'] == 'cancel' %}
+                                                <p> Отмена </p>
+                                                {% elif item['reason'] == 'timeout' %}
+                                                <p> Конец периода аренды </p>
+                                                {% else %}
+                                                <p> Не установлена </p>
+                                                {% endif %}
+                                            </li>
+                                        </ul>
+                                        <div style="display: flex;">
+                                            <form method="post" style="max-width: 800px; margin: auto;" action=\cancellation_requests>
+                                                <input style="display: none" type="text" value="cancel_reservation" name="action">
+                                                <input style="display: none" type="text" value="{{item['reservation_id']}}" name="reservation_id">
+                                                <input style="display: none" type="text" value="{{item['cancellation_id']}}" name="cancellation_id">
+                                                <button style="border-radius: 10px;" type="submit" class="more__btn" >
+                                                    Отменить бронирование
+                                                </button>
+                                            </form>
+                                            <form method="post" style="max-width: 800px; margin: auto;" action=\cancellation_requests>
+                                                <input style="display: none" type="text" value="cancel_cancellation" name="action">
+                                                <input style="display: none" type="text" value="{{item['cancellation_id']}}" name="cancellation_id">
+                                                <button style="border-radius: 10px;" type="submit" class="more__btn" >
+                                                    Отклонить заявку
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
 
@@ -552,6 +690,52 @@
             </div>
         </footer>
     </div>
+    <script>
+         function openbox(id, link) {
+          var allTabs = document.querySelectorAll(".tab_profile");
+          var allContents = document.querySelectorAll(".tabs-content__profile");
+
+          // Удаление класса active у всех ссылок
+          allTabs.forEach(tab => {
+            tab.classList.remove('active');
+          });
+
+          // Установка класса active для выбранной ссылки
+          link.parentNode.classList.add('active');
+
+          // Показывание выбранного содержимого, скрытие остальных
+          allContents.forEach(content => {
+            if (content.id === id) {
+              content.style.display = 'block';
+            } else {
+              content.style.display = 'none';
+            }
+          });
+        }
+
+
+        function openshedulebox(id, link) {
+          var allTabs = document.querySelectorAll(".tab_profile-bot");
+          var allContents = document.querySelectorAll(".shedule-week__box");
+
+          // Удаление класса active у всех ссылок
+          allTabs.forEach(tab => {
+            tab.classList.remove('active');
+          });
+
+          // Установка класса active для выбранной ссылки
+          link.parentNode.classList.add('active');
+
+          // Показывание выбранного содержимого, скрытие остальных
+          allContents.forEach(content => {
+            if (content.id === id) {
+              content.style.display = 'block';
+            } else {
+              content.style.display = 'none';
+            }
+          });
+        }
+    </script>
     <script>
         // Получаем ссылки на карточки
         var links = document.querySelectorAll('.list-info-item');

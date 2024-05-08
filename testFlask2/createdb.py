@@ -64,7 +64,7 @@ c.execute('''CREATE TABLE IF NOT EXISTS reservation (
              FOREIGN KEY(place_id) REFERENCES place(id)
              )''')
 
-# c.execute('''DROP TABLE helper_log''')
+# c.execute('''DROP TABLE cancellation''')
 
 c.execute('''CREATE TABLE IF NOT EXISTS cancellation (
              id INTEGER PRIMARY KEY AUTOINCREMENT,

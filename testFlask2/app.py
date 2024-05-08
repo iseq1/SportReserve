@@ -614,6 +614,22 @@ def update_content():
 
     return redirect(url_for('admin_panel'))
 
+@app.route('/cancellation_requests', methods=['POST'])
+def cancellation_requests():
+    if request.method == 'POST':
+        action = request.form['action']
+        if action == 'cancel_reservation':
+            reservation_id = request.form['reservation_id']
+            cancellation_id = request.form['cancellation_id']
+            with DataPusher('database.db') as changer:
+                changer.delete_data(table='reservation', ID=int(reservation_id))
+                changer.delete_data(table='cancellation', ID=int(cancellation_id))
+        elif action == 'cancel_cancellation':
+            cancellation_id = request.form['cancellation_id']
+            with DataPusher('database.db') as changer:
+                changer.delete_data(table='cancellation', ID=int(cancellation_id))
+    return redirect(url_for('adminpage'))
+
 @app.route('/place_action', methods=['POST'])
 def placeaction():
     if request.method == 'POST':
@@ -757,8 +773,24 @@ def adminpage():
         FROM place
         GROUP BY type, subtype
     ''').fetchall()
+    cancel_info = conn.execute('''
+        SELECT cancellation.id as cancellation_id, cancellation.reservation_id as reservation_id, reservation.place_id as place_id, reservation.user_id as user_id, reservation.start_date as start_date, reservation.finish_date as finish_date, place.type as type, place.subtype as subtype, place.name as name, User.fullname as fullname, User.number as number, User.email as email
+        FROM cancellation
+        JOIN reservation ON reservation.id = cancellation.reservation_id
+        JOIN place ON place.id = reservation.place_id
+        JOIN User ON User.id = reservation.user_id
+        WHERE reservation.id = cancellation.reservation_id
+    ''').fetchall()
+    # timeout_resrvation = cancel_info = conn.execute('''
+    #     SELECT reservation.id, reservation.place_id as place_id, reservation.user_id as user_id, reservation.start_date as start_date, reservation.finish_date as finish_date, place.type as type, place.subtype as subtype, place.name as name, User.fullname as fullname, User.number as number, User.email as email
+    #     FROM reservation
+    #     JOIN place ON place.id = reservation.place_id
+    #     JOIN User ON User.id = reservation.user_id
+    #     WHERE reservation.finish_date = cancellation.reservation_id
+    # ''').fetchall()
     conn.close()
 
+    cancel_list = [dict(ix) for ix in cancel_info]
     json_data = {'place_list': []}
 
     for row in place_info:
@@ -769,6 +801,29 @@ def adminpage():
                 'names': row['names'].split(',') if row['names'] else []
             }]
         })
+
+    for raw in cancel_list:
+        # Создание новой записи, если ключ еще не существует
+        if 'cancel_list' not in json_data:
+            json_data['cancel_list'] = []
+
+        # Добавление данных в существующий ключ
+        json_data['cancel_list'].append({
+            'cancellation_id': raw['cancellation_id'],
+            'reservation_id': raw['reservation_id'],
+            'place_id': raw['place_id'],
+            'user_id': raw['user_id'],
+            'start_date': raw['start_date'],
+            'finish_date': raw['finish_date'],
+            'type': raw['type'],
+            'subtype': raw['subtype'],
+            'name': raw['name'],
+            'fullname': raw['fullname'],
+            'number': raw['number'],
+            'email': raw['email'],
+            'reason': 'cancel'
+        })
+
 
     print(json_data)
 
