@@ -15,8 +15,50 @@ with DataPusher('database.db') as changer:
 
         tennis_indoor()
 
-    tennis()
+    def golf():
+        def golf_in_city():
+            changer.insert_data(table='place', type='Летние площадки', subtype='Поля для игры в гольф в черте города',
+                                name='Гольф-клуб «Сколково»', description='Элитный гольф-клуб в Москве',
+                                subdescription='Гольф-клуб ‘Сколково’, плод совместной работы легендарного Джека Никлауса и инвестиционной компании Millhouse – место для самых взыскательных гольфистов. В распоряжении игроков есть все: от поля мирового уровня ‘Jack Nicklaus Signature’, спроектированного совместно с ландшафтным дизайнером Линдой Бёрд, до клубного дома, построенного по проекту выдающегося японского архитектора Шигеру Бана.',
+                                address='121353,Москва,Сколковское шоссе, 50', rental_period=1, price=7500,
+                                photo_path='../static/images/catalog/summer-sport/golf-incity/golf-incity-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
 
 
+        def golf_out_city():
+            changer.insert_data(table='place', type='Летние площадки', subtype='Поля для игры в гольф за чертой города',
+                                name='Гольф-клуб «Раевский»', description='Элитный загородный гольф-парк',
+                                subdescription='На территории нашего клуба расположены 4 корта под открытым небом с профессиональным американским покрытием HARD – Grand Slam Premium (9 слоев), являющееся эталонным для теннисистов всего мира:\n – 2 теннисных корта;\n – 2 корта для игры в Pickleball; (новая для России игра, сочетающая в себе элементы большого тенниса, настольного тенниса и бадминтона).\n К Вашим услугам комфортные раздевалки и душевые.',
+                                address='ст. Натухаевская, гольф-деревня «Предгорье», Натухаевская, Краснодарский край',
+                                rental_period=1, price=5000,
+                                photo_path='../static/images/catalog/summer-sport/golf-outcity/golf-outcity-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
 
-    # changer.insert_data(table='reservation', )
+            changer.insert_data(table='place', type='Летние площадки', subtype='Поля для игры в гольф за чертой города',
+                                name='Гольф - клуб «Свияжские холмы»', description='Элитный загородный гольф-парк',
+                                subdescription='На площади в 32 гектара прекрасно сочетаются естественные перепады высот, водоемы и песчаные зоны реки Волги и сказочный остров-град Свияжск. Поле имеет 18 лунок различных категорий сложности. Дизайн поля разработала швейцарской компанией «Harradine Golf AG, создающая лучшие гольф-поля в мире с 1929 года.',
+                                address='422595, Республика Татарстан, Верхнеуслонский район, д. Савино',
+                                rental_period=1, price=5000,
+                                photo_path='../static/images/catalog/summer-sport/golf-outcity/golf-outcity-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+            changer.insert_data(table='place', type='Летние площадки', subtype='Поля для игры в гольф за чертой города',
+                                name='Гольф-клуб «Пестово»', description='Элитный загородный гольф- и яхт-клуб',
+                                subdescription='Гольф- и яхт-клуб «Пестово» — абсолютно новый для России загородный комплекс, сочетающий в себе традиции английского загородного клуба: гольф-поле чемпионского класса, элитную недвижимость с видом на поле клабхаус и современный яхт-клуб',
+                                address='Никольская ул., 1, Румянцево, Московская обл., 141301',
+                                rental_period=1, price=4500,
+                                photo_path='../static/images/catalog/summer-sport/golf-outcity/golf-outcity-item-3.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+            changer.insert_data(table='place', type='Летние площадки', subtype='Поля для игры в гольф за чертой города',
+                                name='Гольф-клуб «Завидово»', description='Курортная зона с полем для гольфа',
+                                subdescription='Зави́дово — особо охраняемая природная территория федерального значения со статусом национального парка, относится к объектам общенационального достояния. Национальный парк расположен на территории Московской и Тверской областей, в пределах Верхневолжской низменности.',
+                                address='Тверская область, Конаковский район, д.Шоша',
+                                rental_period=1, price=3500,
+                                photo_path='../static/images/catalog/summer-sport/golf-outcity/golf-outcity-item-4.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+        golf_in_city()
+        golf_out_city()
+
+ 

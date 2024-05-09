@@ -178,7 +178,11 @@ def translate(place_name):
         'Теннисные площадки под открытым небом': 'tennis-outdoor',
         'tennis-outdoor': 'Теннисные площадки под открытым небом',
         'Теннисные площадки под крытым небом': 'tennis-indoor',
-        'tennis-indoor': 'Теннисные площадки под крытым небом'
+        'tennis-indoor': 'Теннисные площадки под крытым небом',
+        'Поля для игры в гольф в черте города': 'golf-incity',
+        'golf-incity': 'Поля для игры в гольф в черте города',
+        'Поля для игры в гольф за чертой города': 'golf-outcity',
+        'golf-outcity': 'Поля для игры в гольф за чертой города',
     }
 
     return names[place_name]
@@ -459,7 +463,7 @@ def catalogpage():
         })
 
     print(json_data)
-    return render_template('catalog.html', json_data=json_data, sender_id=session['user_id'])
+    return render_template('catalog.html', json_data=json_data, sender_id=session['user_id'] if 'user_id' in session else 0)
 
 
 @app.route('/registration', methods=['GET', 'POST'])

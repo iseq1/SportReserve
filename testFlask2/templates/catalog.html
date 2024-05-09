@@ -106,7 +106,7 @@
                             <div class="block-drinks__item-wrap">
                                 {% for subtypes in places['subtypes'] %}
                                 <a class="drinks-item drinks-item_home" href=/catalog-page/{{subtypes[1]}}>
-                                    <div class="scale"><img src="../static/images/catalog/{{places['type'][1]}}/{{subtypes[1]}}/{{subtypes[1]}}.jpg" alt="image"></div>
+                                    <div class="image-darker" ><div class="scale"><img src="../static/images/catalog/{{places['type'][1]}}/{{subtypes[1]}}/{{subtypes[1]}}.jpg" alt="image"></div></div>
                                     <div class="drinks-item__name">{{subtypes[0]}}</div>
                                 </a>
                                 {% endfor %}
