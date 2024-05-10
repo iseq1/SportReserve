@@ -61,4 +61,59 @@ with DataPusher('database.db') as changer:
         golf_in_city()
         golf_out_city()
 
- 
+    def football():
+        def football_in():
+            changer.insert_data(table='place', type='Летние площадки', subtype='Футбольные манежи',
+                                name='Арена Новый Футбол', description='Современный футбольный центр',
+                                subdescription='Играй в комфортных условиях, даже если на улице дождь или снегопад\n Пользуйся индивидуальными локерами, душевыми, фенами и отдельным санузлом\nЖди выхода на поле в местах с диванами для просмотра игр и тренировок\nВсегда доступные парковочные места для наших клиентов',
+                                address='г. Москва, ул. Крылатская д. 2 стр. 22',
+                                rental_period=1, price=6000,
+                                photo_path='../static/images/catalog/summer-sport/football-indoor/football-indoor-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+            changer.insert_data(table='place', type='Летние площадки', subtype='Футбольные манежи',
+                                name='РФЛ-Арена', description='Современный футбольный комплекс',
+                                subdescription='РФЛ-Арена - это новые футбольные комплексы, где тепло зимой и комфортно летом! \n На каждом объекте есть: раздевалки, манишки, мячи, отличная искусственная трава последнего поколения, электронное табло со временем и счетом матча, ,удобное расположение полей в городе! \n Здесь вы можете уточнить свободные часы и стоимость аренды. \n РФЛ - это Регулярная Футбольная Любительская Лига в Самаре. Мы проводим регулярный чемпионат для любительских и корпоративных команд, а также турниры.',
+                                address='г. Москва, Московское шоссе, 77',
+                                rental_period=1, price=2000,
+                                photo_path='../static/images/catalog/summer-sport/football-indoor/football-indoor-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+            changer.insert_data(table='place', type='Летние площадки', subtype='Футбольные манежи',
+                                name='Академия будущего', description='Современный футбольный центр',
+                                subdescription='Манеж Академия будущего находится в самом центре Москвы в 5 минутах от метро Киевская с покрытием искусственная трава последнего поколения и высотой ворса 6 см. Футбольное поле размером 45х22 метра подходит для формата игры 6х6 и 7х7. Помимо игр и тренировок площадка идеально подходит для турниров и мероприятий.',
+                                address='г. Москва, Украинский бульвар, 9',
+                                rental_period=1, price=3000,
+                                photo_path='../static/images/catalog/summer-sport/football-indoor/football-indoor-item-3.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+        football_in()
+
+        def football_out():
+            changer.insert_data(table='place', type='Летние площадки', subtype='Открытые футбольные площадки',
+                                name='Олимп Арена', description='Модерн футбольное поле',
+                                subdescription='Олимп Арена находится на территории ЖК Золотые ключи-2. Арендовать можно с 07:00 утра до 00.00 ночи. Футбольное поле размером 60х30 оптимально подходит для игры в формате 8×8/7×7/6×6 игроков на всем поле с воротами 5×2 м. Для 8-10 игроков (формат 5х5) можно арендовать 1/2 поля и играть с воротами 3×2 м. Летняя раздевалка находится в 10 м от поля. Душевые находятся в теплой раздевалке в 150 м от поля. Бесплатная парковка рядом с полем. Для игры в вечернее время есть искусственное светодиодное освещение - 250 люкс.',
+                                address=' г. Москва, ул. Минская 1Г',
+                                rental_period=1, price=1750,
+                                photo_path='../static/images/catalog/summer-sport/football-outdoor/football-outdoor-item-1.jpg',
+                                locker_rooms='False', shower='False', parking='True', inventory='True')
+
+            changer.insert_data(table='place', type='Летние площадки', subtype='Открытые футбольные площадки',
+                                name='Футбольные поля «Под Мостом»', description='Модерн футбольное поле',
+                                subdescription='«Под мостом» для футбола — это круглогодичная многофункциональная площадка в спортивном сердце города:\nмини-футбольные поля с искусственным газоном\nфутбольные коробки с качественным покрытием\nраздевалки, фуд-корт и огромное количество других удобств для вашего комфорта\nНа площадке проводятся футбольные турниры разного уровня. Технические характеристики пространства позволяют проводить и принимать мероприятия любого формата (спортивные зрелищные, выставочно-презентационные, корпоративные и другие)',
+                                address=' г. Москва, Ул. Лужники 24, Под Мостом ',
+                                rental_period=1, price=1500,
+                                photo_path='../static/images/catalog/summer-sport/football-outdoor/football-outdoor-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+            changer.update_data(table='place', ID=17, type='Летние площадки', subtype='Открытые футбольные площадки',
+                                name='Футбольное поле CitySport', description='Модерн футбольное поле',
+                                subdescription='Футбольный стадион City Sport Красная Пресня – это основное футбольное поле размером 90*60, которое делится на 2 или 4 части. Данное футбольное поле с качественным покрытием искусственная трава 4 см последнего поколения, поэтому использовать его можно как в зимнее, так и в летнее время.',
+                                address='г. Москва, ул. Дружинниковская, 18  ', rental_period=1, price=3300,
+                                photo_path='../static/images/catalog/summer-sport/football-outdoor/football-outdoor-item-3.jpg',
+                                locker_rooms='True', shower='False', parking='True', inventory='True')
+
+        football_out()
+
+
+

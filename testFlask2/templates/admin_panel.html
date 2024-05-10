@@ -134,8 +134,12 @@
                                                         </div>
                                                         <select style="padding-right: 50px;" name="type" id="typeSelect">
                                                             <option value="0" selected>Выберите тип</option>
+                                                            {% set unique_types = [] %}
                                                             {% for item in json_data['place_list'] %}
-                                                            <option value="{{item['type']}}">{{item['type']}}</option>
+                                                                {% if item['type'] not in unique_types %}
+                                                                    {% set _ = unique_types.append(item['type']) %}
+                                                                    <option value="{{item['type']}}">{{item['type']}}</option>
+                                                                {% endif %}
                                                             {% endfor %}
                                                         </select>
                                                     </li>
@@ -146,14 +150,30 @@
                                                         </div>
                                                         <select style="padding-right: 50px;" name="subtype" id="subtypeSelect">
                                                             <option value="0" selected>Выберите подтип</option>
+                                                            {% set unique_types = {} %}
+
                                                             {% for item in json_data['place_list'] %}
-                                                            <optgroup label="{{item['type']}}">
+                                                                {% set subtype_names = [] %}
                                                                 {% for types in item['subtype'] %}
-                                                                <option value="{{types['name']}}">{{types['name']}}</option>
+                                                                    {% set _ = subtype_names.append(types['name']) %}
                                                                 {% endfor %}
-                                                            </optgroup>
+
+                                                                {% if item['type'] not in unique_types %}
+                                                                    {% set _ = unique_types.update({item['type']: subtype_names}) %}
+                                                                {% else %}
+                                                                    {% set _ = unique_types[item['type']].extend(subtype_names) %}
+                                                                {% endif %}
+                                                            {% endfor %}
+
+                                                            {% for type, subtypes in unique_types.items() %}
+                                                                <optgroup label="{{ type }}">
+                                                                    {% for subtype in subtypes %}
+                                                                        <option value="{{ subtype }}">{{ subtype }}</option>
+                                                                    {% endfor %}
+                                                                </optgroup>
                                                             {% endfor %}
                                                         </select>
+
                                                     </li>
                                                     <li style="display: flex; justify-content: space-between;">
                                                         <div style="display: flex; justify-content: space-between;">
@@ -244,15 +264,17 @@
                                             Выберите карточку для изменения
                                             </h2>
                                         </div>
-                                        <ul class="listInfo Choose-card" style="display: list-item">
-                                            {% for item in json_data['place_list'] %}
+                                        <ul class="listInfo Choose-card" style="display: list-item;">
+                                            {% for typesss in json_data['type_info'] %}
                                             <li style="display: list-item;">
-                                                <h3 style="padding-bottom:10px;">{{item['type']}}</h3>
-                                                <ul class="listInfo Choose-card">
+                                                <h3 style="padding-bottom: 10px;">{{typesss['type']}}</h3>
+                                                {% for item in json_data['place_list'] %}
+                                                {% if typesss['type'] == item['type'] %}
+                                                <ul class="listInfo Choose-card" style=" margin: 0 0 25px;">
                                                     {% for subtype in item['subtype'] %}
                                                     <li style="padding-left: 50px; display: list-item;">
                                                         <h4 style="padding-bottom:20px;">{{subtype['name']}}</h4>
-                                                        <ul class="listInfo Choose-card">
+                                                        <ul class="listInfo Choose-card" style=" margin: 0 0 25px;">
                                                             {% for name in subtype['names'] %}
                                                             <li style="padding-left: 50px; display: list-item;">
                                                                 <a data-target="change_card_form" href="#" class="list-info-item" data-type="{{item['type']}}" data-subtype="{{subtype['name']}}" data-name="{{name}}">
@@ -265,9 +287,12 @@
                                                     </li>
                                                     {% endfor %}
                                                 </ul>
+                                                {% endif %}
+                                                {% endfor %}
                                             </li>
                                             <hr>
                                             {% endfor %}
+
                                         </ul>
                                     </div>
                                     <div id="change_card_form" class="user" style="display: none;">
@@ -382,14 +407,17 @@
                                             </h2>
                                         </div>
                                         <ul class="listInfo delete-card" style="display: list-item">
-                                            {% for item in json_data['place_list'] %}
+
+                                            {% for typesss in json_data['type_info'] %}
                                             <li style="display: list-item;">
-                                                <h3 style="padding-bottom:10px;">{{item['type']}}</h3>
-                                                <ul class="listInfo delete-card">
+                                                <h3 style="padding-bottom: 10px;">{{typesss['type']}}</h3>
+                                                {% for item in json_data['place_list'] %}
+                                                {% if typesss['type'] == item['type'] %}
+                                                <ul class="listInfo delete-card" style=" margin: 0 0 25px;">
                                                     {% for subtype in item['subtype'] %}
                                                     <li style="padding-left: 50px; display: list-item;">
                                                         <h4 style="padding-bottom:20px;">{{subtype['name']}}</h4>
-                                                        <ul class="listInfo delete-card">
+                                                        <ul class="listInfo delete-card" style=" margin: 0 0 25px;">
                                                             {% for name in subtype['names'] %}
                                                             <li style="padding-left: 50px; display: list-item;">
                                                                 <form class="inputForm__change-card" method="post" action=/place_action style="margin: 0px 0px; justify-content: left;" enctype="multipart/form-data">
@@ -408,6 +436,8 @@
                                                     </li>
                                                     {% endfor %}
                                                 </ul>
+                                                {% endif %}
+                                                {% endfor %}
                                             </li>
                                             <hr>
                                             {% endfor %}

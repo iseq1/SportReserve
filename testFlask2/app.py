@@ -183,6 +183,10 @@ def translate(place_name):
         'golf-incity': 'Поля для игры в гольф в черте города',
         'Поля для игры в гольф за чертой города': 'golf-outcity',
         'golf-outcity': 'Поля для игры в гольф за чертой города',
+        'Открытые футбольные площадки': 'football-outdoor',
+        'football-outdoor': 'Открытые футбольные площадки',
+        'Футбольные манежи': 'football-indoor',
+        'football-indoor': 'Футбольные манежи',
     }
 
     return names[place_name]
@@ -800,6 +804,10 @@ def adminpage():
         FROM place
         GROUP BY type, subtype
     ''').fetchall()
+    type_info = conn.execute('''
+            SELECT DISTINCT type
+            FROM place
+        ''').fetchall()
     cancel_info = conn.execute('''
         SELECT cancellation.id as cancellation_id, cancellation.reservation_id as reservation_id, reservation.place_id as place_id, reservation.user_id as user_id, reservation.start_date as start_date, reservation.finish_date as finish_date, place.type as type, place.subtype as subtype, place.name as name, User.fullname as fullname, User.number as number, User.email as email
         FROM cancellation
@@ -820,6 +828,12 @@ def adminpage():
     cancel_list = [dict(ix) for ix in cancel_info]
     json_data = {'place_list': []}
 
+    for row in type_info:
+        if 'type_info' not in json_data:
+            json_data['type_info'] = []
+        json_data['type_info'].append({
+            'type': row['type']
+        })
     for row in place_info:
         json_data['place_list'].append({
             'type': row['type'],
@@ -828,7 +842,6 @@ def adminpage():
                 'names': row['names'].split(',') if row['names'] else []
             }]
         })
-
     for raw in cancel_list:
         # Создание новой записи, если ключ еще не существует
         if 'cancel_list' not in json_data:

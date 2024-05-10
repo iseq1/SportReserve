@@ -58,10 +58,10 @@
         <main class="main">
             <input type="hidden" id="sender-id" value="{{ sender_id }}">
             <button class="chatbot-toggler">
-                <span class="material-symbols-outlined">mode_comment</span>
-                <span class="material-symbols-outlined">close</span>
+                <img class="ic_finished_orders icon-open" src="../static/images/svg-files/chat.svg" style="filter: invert(100%); width: 30px; height: 30px;" alt="">
+                <img class="ic_finished_orders icon-close" src="../static/images/svg-files/cancel.svg" style="filter: invert(100%); width: 30px; height: 30px; display:none;" alt="">
             </button>
-            <div class="chatbot">
+            <div class="chatbot" style="display: none;">
                 <header>
                     <h2>Тех.поддержка</h2>
                     <span class="material-symbols-outlined">close</span>
@@ -247,7 +247,24 @@
             </div>
         </footer>
     </div>
+    <script>
+        const toggleButton = document.querySelector('.chatbot-toggler');
+        const chatbot = document.querySelector('.chatbot');
+        const iconOpen = document.querySelector('.icon-open');
+        const iconClose = document.querySelector('.icon-close');
 
+        toggleButton.addEventListener('click', () => {
+            if (chatbot.style.display === 'none') {
+                chatbot.style.display = 'block';
+                iconOpen.style.display = 'none';
+                iconClose.style.display = 'inline-block';
+            } else {
+                chatbot.style.display = 'none';
+                iconOpen.style.display = 'inline-block';
+                iconClose.style.display = 'none';
+            }
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="../static/js/helper-window-message-taker-user-side.js"></script>
