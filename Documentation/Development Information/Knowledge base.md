@@ -71,6 +71,43 @@
         - Из списка площадок выбрать необходимую,
         - Нажать на неё для удаления.
 
+## Структура проекта
+Схематическое представление структуры проекта
+SportReserve
+- static
+    - css
+        - style.css
+    - images
+        - catalog
+            - parquet-sport
+            - summer-sport
+            - winter-sport
+            - swimming-pool-sport
+        - slider-main
+        - svg-files
+    - js
+        - auto-scroll-chat.js
+        - helper-window-message-taker-helper-side.js
+        - helper-window-message-taker-user-side.js
+        - helper-window-shower.js
+        - slider-main.js
+        - yes-no-show.js
+- templates
+    - admin_panel.html
+    - catalog.html
+    - helper_panel.html
+    - index.html
+    - login.html
+    - profile.html
+    - registration.html
+    - selected-places.html
+- venv
+- app.py
+- createdb.py
+- dbfill.py
+- dbpush.py
+- database.db
+
 ## Техническое содержание
 Краткое описание технической части
 ### app.py
