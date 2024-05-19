@@ -115,5 +115,144 @@ with DataPusher('database.db') as changer:
 
         football_out()
 
+    def badminton():
+        def badminton_court():
+            changer.insert_data(table='place', type='Летние площадки', subtype='Корты для игры в бадминтон',
+                                name='Школа бадминтона «Мультиспорт»', description='Современный бадминтон центр',
+                                subdescription='Покрытие кортов GerflorTaraflex, адаптированы к проведению международных соревнований. Освещение 1000 люкс. Четырехзонная система климат-контроля.\nИндивидуальные и групповые занятия для детей и взрослых под руководством профессиональных тренеров высокой квалификации.',
+                                address='Лужники, 24, с 10, Москва',
+                                rental_period=1, price=2500,
+                                photo_path='../static/images/catalog/summer-sport/badminton/badminton-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+            changer.insert_data(table='place', type='Летние площадки', subtype='Корты для игры в бадминтон',
+                                name='СК Newton Arena', description='Современный бадминтон комплекс',
+                                subdescription='Групповые и индивидуальные тренировки для детей и взрослых, аренда корта.',
+                                address='1-й Нагатинский, пр-д 10, стр.3, Москва',
+                                rental_period=1, price=2000,
+                                photo_path='../static/images/catalog/summer-sport/badminton/badminton-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+        badminton_court()
+
+    def hockey():
+        def hockey_in():
+            changer.insert_data(table='place', type='Зимние площадки', subtype='Ледовые арены для игры в хоккей',
+                                name='Хоккейный комплекс "Академия "Спартак"', description='Хоккейный комплекс',
+                                subdescription='На территории хоккейного комплекса площадью 10 000 кв.м. расположены современные ледовые площадки: «финская» 60х26м и «канадская» 56х26м, площадки соответствуют стандартам IIHF для тренировок и соревнований хоккеистов и фигуристов. Одно из полей комплекса оснащено специальным оборудованием, предназначенным для комфортных тренировок команд по следж-хоккею. Площадки оборудованы системой игрового света и звука, что необходимо для качественного проведения матчей, турниров и других спортивных мероприятий. Раздевалка предоставляется за 30 минут до старта арендованного времени.',
+                                address=' ул.Б.Тихоновская, дом 2, стр. 1',
+                                rental_period=1, price=8000,
+                                photo_path='../static/images/catalog/winter-sport/hockey/hockey-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+            changer.insert_data(table='place', type='Зимние площадки', subtype='Ледовые арены для игры в хоккей',
+                                name='"Южный лед"', description='Ледовая арена',
+                                subdescription='«Южный лёд» — современный многофункциональный ледовый комплекс, оборудованный по последнему слову техники и отвечающий всем современным требованиям для проведения спортивных мероприятий любой сложности. Он ориентирован на проведение тренировок и соревнований как для хоккеистов, так и для фигуристов.',
+                                address='ул. Маршала Савицкого, д. 7 ',
+                                rental_period=1, price=2500,
+                                photo_path='../static/images/catalog/winter-sport/hockey/hockey-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+            changer.insert_data(table='place', type='Зимние площадки', subtype='Ледовые арены для игры в хоккей',
+                                name='Академия Будущего', description='Ледовый комплекс',
+                                subdescription='10 января 2022 г. открылся новый ледовый комплекс Академия Будущего, с двумя катками размером 58 на 26 и 30 Х 15 - это идеальная площадка для: тренировок, игр, турниров, товарищеских матчей а также для школ фигурного катания.\nВ комплексе имеется 6 просторных раздевалок с душевыми, бросковая зона. Предоставляются услуги по сушке хоккейной формы, заточке коньков а также услуги тренера по хоккею и организации хоккейных турниров.',
+                                address=' 1-й нагатинский проезд 2с17 ',
+                                rental_period=1, price=3500,
+                                photo_path='../static/images/catalog/winter-sport/hockey/hockey-item-3.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+        hockey_in()
+
+    def curling():
+        def curling_in():
+            changer.insert_data(table='place', type='Зимние площадки', subtype='Ледовые арены для игры в керлинг',
+                                name='СШОР «Москвич»', description='Керлинг-центр',
+                                subdescription='Крытая площадка для игры в кёрлинг с раздевалками и всем необходимым инвентарем. В игровой зоне — четыре дорожки 5×25 метров с разметкой. Можно взять урок у тренера, в том числе и для детей, или поиграть самостоятельно.',
+                                address='Волгоградский пр-кт., д. 46/15, стр. 10',
+                                rental_period=1, price=3500,
+                                photo_path='../static/images/catalog/winter-sport/curling/curling-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+            changer.insert_data(table='place', type='Зимние площадки', subtype='Ледовые арены для игры в керлинг',
+                                name='«Московский керлинг-клуб»', description='Керлинг-центр',
+                                subdescription='Самый большой керлинг-клуб в Москве. Находится недалеко от станции метро «Пролетарская». Здесь оборудовано пять дорожек с разметкой и есть ресторан. В клубе регулярно проводят групповые тренировки.',
+                                address='Михайловский пр-д, 1с1',
+                                rental_period=1, price=3250,
+                                photo_path='../static/images/catalog/winter-sport/curling/curling-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+            changer.insert_data(table='place', type='Зимние площадки', subtype='Ледовые арены для игры в керлинг',
+                                name='Ледовый стадион «Лужки.клуб»', description='Центр зимних видов спорта',
+                                subdescription='В загородном клубе есть две крытые арены «Олимпийский стандарт» и «Канадский стандарт» с дорожкой для керлинга. Одновременно могут играть десять человек. А для детей есть игровая комната с лабиринтом, настольными играми и зоной для творчества.',
+                                address='Московская обл., г. о. Истра, Лужки.клуб',
+                                rental_period=1, price=7500,
+                                photo_path='../static/images/catalog/winter-sport/curling/curling-item-3.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+        curling_in()
+
+    def swimmingpool():
+        def sport_pool():
+            changer.insert_data(table='place', type='Бассейны', subtype='Спортивные бассейны',
+                                name='Московский олимпийский центр водного спорта', description='Олимпийский центр',
+                                subdescription='Комплекс состоит из двух блоков — закрытого и открытого. В первом три бассейна: 50-метровый на восемь дорожек, 25-метровый на шесть дорожек и маленький 17-метровый. За дополнительную плату можно заниматься аквааэробикой или учиться плавать. Во втором блоке — открытый 50-метровый бассейн на восемь дорожек.',
+                                address='Ибрагимова, 32',
+                                rental_period=1, price=6300,
+                                photo_path='../static/images/catalog/swimming-pool-sport/swimming-pool-sport/swimming-pool-sport-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+            changer.insert_data(table='place', type='Бассейны', subtype='Спортивные бассейны',
+                                name='Водный стадион «Динамо»', description='Cпорт-комплекс',
+                                subdescription='В спорткомплексе один большой бассейн длиной 50 метров на десять дорожек. В 2013 году «Динамо» реконструировали: сделали свежий ремонт, установили панорамные окна в пол и обновили систему очистки воды — теперь в ней практически нет хлора, поэтому кожа меньше сохнет. В бассейне проводят занятия по аквааэробике, есть утренние и вечерние группы обучения плаванию для взрослых, также можно взять индивидуальные занятия с инструктором (все уроки оплачиваются отдельно). Из несовершенств — в «Динамо» часто проводят соревнования, поэтому могут отменять сеансы или закрывать половину дорожек. ',
+                                address='Ленинградское шоссе, 39, стр. 53',
+                                rental_period=1, price=7000,
+                                photo_path='../static/images/catalog/swimming-pool-sport/swimming-pool-sport/swimming-pool-sport-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+            changer.insert_data(table='place', type='Бассейны', subtype='Спортивные бассейны',
+                                name='Royal Wellness Club', description='Велнес-клуб',
+                                subdescription='Один из самых дорогих бассейнов Москвы находится в велнес-клубе гостиницы Radisson Royal. Плавательные дорожки построены по олимпийским стандартам — 50 метров. Также в клубе работают две гидромассажные ванны, русская баня, сауна, турецкий хаммам и зона отдыха с шезлонгами. По расписанию проводят аквааэробику, можно взять занятия с инструктором. Абонементов нет, только клубные карты. Медицинскую справку не требуют.',
+                                address='Кутузовский просп., 2/1, стр. 1',
+                                rental_period=1, price=30000,
+                                photo_path='../static/images/catalog/swimming-pool-sport/swimming-pool-sport/swimming-pool-sport-item-3.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+
+        sport_pool()
+        def chill_pool():
+            changer.insert_data(table='place', type='Бассейны', subtype='Бассейны для отдыха',
+                                name='«The БАSSЕЙН»', description='Открытый бассейн в парке «Сокольники»',
+                                subdescription='Каждый летний день с 10:00 до 22:00 посетители парка «Сокольники» могут не только поплавать в двух небольших бассейнах, но и потанцевать у открытой воды. С понедельника по субботу развлекательное пространство «The БАSSЕЙН» организует вечеринки, на которых играют гости из Gipsy, Space Moscow, Icon и других модных столичных заведений.\nК услугам отдыхающих – искусственные водоемы итальянского и немецкого производства, шезлонги, раздевалки и душевые, столы для пинг-понга, площадка для занятия йогой и аэробикой, кафе с летней верандой. Можно арендовать различный спортинвентарь – бадминтон, волейбольный мяч, нарды. \nВода в детском бассейне с водной горкой подогревается до 30 градусов, а чтобы гости могли отвлечься и не волноваться за ребенка, здесь всегда дежурит спасатель.',
+                                address='Митьковский проезд, д. 1, стр. 1',
+                                rental_period=1, price=5000,
+                                photo_path='../static/images/catalog/swimming-pool-sport/swimming-pool-chill/swimming-pool-chill-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+            changer.insert_data(table='place', type='Бассейны', subtype='Бассейны для отдыха',
+                                name='«Флакон»', description='Пляж в экшн-парке дизайн-завода «Флакон»',
+                                subdescription='Прямо скажем, своими размерами искусственный водоем, расположенный в экшн-парке дизайна-завода «Флакон», не впечатляет – всего-то 5 на 10 метров, хотя на здешней террасе есть и лежаки с гамаками, и душ, и зонтики от солнца. \nЧто вас наверняка впечатлит в этом фестивальном арт-пространстве – так это проходящие вокруг искусственного водоема всевозможные активности: можно поплавать на скимборде или поиграть в пинг-понг, потанцевать на пляжной вечеринке или послушать живой концерт, посидеть в кафе или пройтись по модным дизайнерским магазинам.',
+                                address='ул. Большая Новодмитровская, д. 36',
+                                rental_period=1, price=3000,
+                                photo_path='../static/images/catalog/swimming-pool-sport/swimming-pool-chill/swimming-pool-chill-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='True')
+        chill_pool()
+
+
+    def parquet_sport():
+        def ballroom_dance():
+            changer.insert_data(table='place', type='Паркетные площадки', subtype='Бальные танцы',
+                                name='Высшая школа танца', description='Школа бального танца для начинающих',
+                                subdescription='Высшая школа танца ведет обучение бальным танцам с индивидуальным подходом к каждому ученику.\nНаша методика обучения взрослых людей направлена на быструю адаптацию тела к танцевальной технике и позволяет в кратчайшие сроки получить максимальные результаты.',
+                                address='метро Преображенская площадь, Преображенская площадь, дом 12',
+                                rental_period=1, price=7000,
+                                photo_path='../static/images/catalog/parquet-sport/ballroom-dance/ballroom-dance-item-1.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='False')
+            changer.insert_data(table='place', type='Паркетные площадки', subtype='Бальные танцы',
+                                name='Galla Dance', description='Школа бального танца',
+                                subdescription='Galla Dance предлагает занятия по бальным танцам европейской и латиноамериканской программы: вальсу, танго, фокстроту, квикстепу, ча-ча-ча, самбе, румбе, пасодоблю и джайву. ',
+                                address='метро Новослободская, дом 52',
+                                rental_period=1, price=8000,
+                                photo_path='../static/images/catalog/parquet-sport/ballroom-dance/ballroom-dance-item-2.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='False')
+            changer.insert_data(table='place', type='Паркетные площадки', subtype='Бальные танцы',
+                                name='Time to Dance', description='Школа бального танца',
+                                subdescription='В Time to Dance наглядно объяснят, как красиво танцевать в паре, даже если раньше бальными танцами вы никогда не занимались. Среди программ для начинающих танго, вальс, фокстрот и румба. Можно выбрать цикл из трех, пяти и десяти индивидуальных занятий – за 9900, 16 500 и 33 000 рублей соответственно. Занятия проходят в студии, расположенной в ТЦ «Авиапарк».',
+                                address='м. ЦСКА',
+                                rental_period=1, price=9500,
+                                photo_path='../static/images/catalog/parquet-sport/ballroom-dance/ballroom-dance-item-3.jpg',
+                                locker_rooms='True', shower='True', parking='True', inventory='False')
+        ballroom_dance()
 
 

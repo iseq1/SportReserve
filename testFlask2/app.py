@@ -175,6 +175,13 @@ def translate(place_name):
     names = {
         # для кастомных имён сохраняемых картинок
         'Летние площадки': 'summer-sport',
+        'summer-sport': 'Летние площадки',
+        'Зимние площадки': 'winter-sport',
+        'winter-sport': 'Зимние площадки',
+        'Бассейны': 'swimming-pool-sport',
+        'swimming-pool-sport': 'Бассейны',
+        'Паркетные площадки': 'parquet-sport',
+        'parquet-sport': 'Паркетные площадки',
         'Теннисные площадки под открытым небом': 'tennis-outdoor',
         'tennis-outdoor': 'Теннисные площадки под открытым небом',
         'Теннисные площадки под крытым небом': 'tennis-indoor',
@@ -187,6 +194,19 @@ def translate(place_name):
         'football-outdoor': 'Открытые футбольные площадки',
         'Футбольные манежи': 'football-indoor',
         'football-indoor': 'Футбольные манежи',
+        'badminton': 'Корты для игры в бадминтон',
+        'Корты для игры в бадминтон': 'badminton',
+        'hockey': 'Ледовые арены для игры в хоккей',
+        'Ледовые арены для игры в хоккей': 'hockey',
+        'curling': 'Ледовые арены для игры в керлинг',
+        'Ледовые арены для игры в керлинг': 'curling',
+        'swimming-pool-sport': 'Спортивные бассейны',
+        'Спортивные бассейны': 'swimming-pool-sport',
+        'swimming-pool-chill': 'Бассейны для отдыха',
+        'Бассейны для отдыха': 'swimming-pool-chill',
+        'ballroom-dance': 'Бальные танцы',
+        'Бальные танцы': 'ballroom-dance',
+
     }
 
     return names[place_name]
@@ -451,6 +471,7 @@ def catalogpage():
             SELECT type, GROUP_CONCAT(DISTINCT subtype) AS subtypes
             FROM place
             GROUP BY type
+            ORDER BY type DESC
         ''').fetchall()
     conn.close()
 
@@ -623,7 +644,7 @@ def update_content():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        save_path = os.path.join(path_to_save_images, filename)
+        save_path = os.path.join(path_to_save, filename)
         imgpath = "/static/images/"+filename
         file.save(save_path)
         # Обновите путь изображения в вашей базе данных
@@ -779,7 +800,7 @@ def placeaction():
                 new_inventory = 'False'
 
             with DataPusher('database.db') as changer:
-                changer.update_data(table='place', ID=f'{place_info['id']}', type=f'{type}', subtype=f'{subtype}', name=f'{name}', description=f'{new_description}',
+                changer.update_data(table='place', ID=f'{place_info["id"]}', type=f'{type}', subtype=f'{subtype}', name=f'{name}', description=f'{new_description}',
                                     subdescription=f'{new_subdescription}', address=f'{new_address}', rental_period=int(new_rental_period), price=int(new_price),
                                     photo_path=f'{new_photo_path}', locker_rooms=f'{new_locker_room}', shower=f'{new_shower}', parking=f'{new_parking}', inventory=f'{new_inventory}')
         elif action == 'delete':
@@ -791,7 +812,7 @@ def placeaction():
                 f'''SELECT * FROM place WHERE type = "{type}" AND subtype="{subtype}" AND name="{name}"''').fetchone()
             conn.close()
             with DataPusher('database.db') as changer:
-                changer.delete_data(table='place', ID=f'{place_info['id']}')
+                changer.delete_data(table='place', ID=f'{place_info["id"]}')
 
     return redirect(url_for('adminpage'))
 
@@ -800,10 +821,11 @@ def placeaction():
 def adminpage():
     conn = get_db_connection()
     place_info = conn.execute('''
-        SELECT type, subtype, STRING_AGG(name, ',') AS names
+        SELECT type, subtype, GROUP_CONCAT(name, ',') AS names
         FROM place
         GROUP BY type, subtype
     ''').fetchall()
+
     type_info = conn.execute('''
             SELECT DISTINCT type
             FROM place
